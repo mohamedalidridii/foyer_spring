@@ -1,11 +1,13 @@
 package org.example.tpfoyer.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.example.tpfoyer.entities.Bloc;
 import org.example.tpfoyer.entities.Reservation;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -21,6 +23,7 @@ public class Chambre {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     long numeroChambre;
+
     @Enumerated(EnumType.STRING)
     TypeChambre typeChambre;
 
@@ -28,5 +31,6 @@ public class Chambre {
     Bloc blocs;
 
     @OneToMany
-    Set<Reservation> reservations;
+            @JsonIgnore
+    Set<Reservation> reservations=new HashSet<Reservation>();
 }

@@ -1,8 +1,9 @@
 package org.example.tpfoyer.services;
 
-import lombok.AllArgsConstructor;
+import org.example.tpfoyer.dto.ChambreDTO;
 import org.example.tpfoyer.entities.Chambre;
-
+import org.example.tpfoyer.entities.TypeChambre;
+import org.example.tpfoyer.mapper.ChambreMapper;
 import org.example.tpfoyer.repositories.ChambreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,13 +12,25 @@ import java.util.List;
 
 @Service
 public class ChambreServiceImpl implements IChambreService {
-    @Autowired
-    ChambreRepository chambreRepository;
 
+    @Autowired
+    private ChambreRepository chambreRepository;
+
+    @Autowired
+    private ChambreMapper chambreMapper;  // Only ONE mapper declaration
 
     @Override
-    public Chambre addOrUpdateChambre(Chambre chambre) {
-        return chambreRepository.save(chambre);
+    public ChambreDTO getChambreById(long id) {
+        Chambre chambre = chambreRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Chambre not found with id: " + id));
+        return chambreMapper.toDTO(chambre);  // Changed from toDoto to toDTO
+    }
+
+    @Override
+    public ChambreDTO addOrUpdateChambre(ChambreDTO chambreDTO) {
+        Chambre chambre = chambreMapper.toEntity(chambreDTO);
+        Chambre savedChambre = chambreRepository.save(chambre);
+        return chambreMapper.toDTO(savedChambre);  // Changed from toDoto to toDTO
     }
 
     @Override
@@ -26,12 +39,22 @@ public class ChambreServiceImpl implements IChambreService {
     }
 
     @Override
-    public List<Chambre> getChambre() {
-        return chambreRepository.findAll();
+    public List<ChambreDTO> getAllChambres() {
+        return chambreRepository.findAll()
+                .stream()
+                .map(chambreMapper::toDTO)  // Changed from toDoto to toDTO
+                .toList();
+    }
+    @Override
+    public List<Chambre> getAllchambresbyType(TypeChambre type) {
+
+        return chambreRepository.findAllByTypeChambre(type);
+    }
+//
+//
+    public Chambre getchambresbynumero(long numero) {
+
+        return chambreRepository.findByNumeroChambre(numero);
     }
 
-    @Override
-    public Chambre getChambre(long id) {
-        return chambreRepository.findById(id).get();
-    }
 }

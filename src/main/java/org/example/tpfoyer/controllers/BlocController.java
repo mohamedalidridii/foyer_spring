@@ -37,4 +37,38 @@ public class BlocController {
     Bloc findByIdBloc(@PathVariable Long idBloc){
         return blocService.getBloc(idBloc);
     }
+
+    @PutMapping("/affecterBlocAFoyer/{idBloc}/{idFoyer}")
+    public Bloc affecterBlocAFoyer(@PathVariable Long idBloc, @PathVariable Long idFoyer) {
+        return blocService.affecterBlocAFoyer(idBloc, idFoyer);
+    }
+
+    @PostMapping("/ajouterBlocAvecFoyer")
+    public Bloc ajouterBlocAvecFoyer(@RequestBody Bloc bloc) {
+        return blocService.addOrUpdateBloc(bloc);
+    }
+
+    @PutMapping("/desaffecterBlocDeFoyer/{idBloc}")
+    public Bloc desaffecterBlocDeFoyer(@PathVariable Long idBloc) {
+        return blocService.desaffecterBlocDeFoyer(idBloc);
+    }
+
+    @GetMapping("/getBlocsWithNoFoyer")
+    public List<Bloc> getBlocsWithNoFoyer() {
+        return blocService.getBlocsWithNoFoyer();
+    }
+
+    @GetMapping("/getBlocsGreaterThan30")
+    public List<Bloc> getBlocsGreaterThanNumber() {
+        return blocService.getBlocsGreaterThanNumber();
+    }
+//
+    @GetMapping("/getBlocsStartsWithCaractereA")
+    public List<Bloc> getBlocsStartingWithCaracter() {
+        return blocService.getBlocsStartingWithCaracter();
+    }
+    @GetMapping("/getBlocsStartsWithCaractereA_AndgetBlocsGreaterThan30")
+    public  List<Bloc> getBlocsStartingWithCaracterAndGreaterThanNumber(){
+        return blocService.getBlocsStartingWithCaracterAndGreaterThanNumber();
+    }
 }
