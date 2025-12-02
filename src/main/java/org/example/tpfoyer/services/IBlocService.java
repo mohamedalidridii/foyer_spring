@@ -16,4 +16,10 @@ public interface IBlocService {
     List<Bloc> getBlocsGreaterThanNumber();
     List<Bloc> getBlocsStartingWithCaracter();
     List<Bloc> getBlocsStartingWithCaracterAndGreaterThanNumber();
+    List<Bloc> findBlocsWithNomjpql();
+    List<Bloc> findBlocsWithCapaciteBloc();
+    List<Bloc> findBlocsByFoyerCapacity(Long capacity);
+    void renameBloc(Long id, String nomBloc);
+    void deleteBloc(String nomBloc);
+
 }

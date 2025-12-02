@@ -7,9 +7,12 @@ import org.example.tpfoyer.entities.Foyer;
 import org.example.tpfoyer.repositories.BlocRepository;
 
 import org.example.tpfoyer.repositories.FoyerRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -97,4 +100,25 @@ public class BlocServiceImpl implements IBlocService {
         return blocRepository.findAllByCapaciteBlocGreaterThanAndNomBlocStartingWith(100,"B");
 
     }
+    @Override
+    public List<Bloc> findBlocsWithNomjpql(){
+        return blocRepository.findBlocsWithNom();
     }
+    @Override
+    public List<Bloc> findBlocsWithCapaciteBloc(){
+        return blocRepository.findBlocsWithCapaciteBloc();
+    }
+    @Override
+    public List<Bloc> findBlocsByFoyerCapacity(Long capacity) {
+        return blocRepository.findBlocsWithCapacityFoyer(capacity);
+    }
+
+    @Override
+    public void renameBloc(Long id, String nomBloc){
+        blocRepository.updateNomBloc(id, nomBloc);
+    }
+    @Override
+    public void deleteBloc(String nombloc){
+        blocRepository.deleteBloc(nombloc);
+    }
+}

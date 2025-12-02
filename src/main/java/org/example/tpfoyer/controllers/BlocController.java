@@ -71,4 +71,26 @@ public class BlocController {
     public  List<Bloc> getBlocsStartingWithCaracterAndGreaterThanNumber(){
         return blocService.getBlocsStartingWithCaracterAndGreaterThanNumber();
     }
+    @GetMapping("/getBlocsnotnulljpql")
+    public List<Bloc> getBlocsnotnulljpql() {
+        return blocService.findBlocsWithNomjpql();
+    }
+    @GetMapping("/findBlocsWithCapaciteBloc")
+    public List<Bloc> findBlocsWithCapaciteBloc() {
+        return blocService.findBlocsWithCapaciteBloc();
+    }
+    @GetMapping("/findBlocsfoyer/{capacity}")
+    public List<Bloc> findBlocsfoyer(@PathVariable Long capacity) {
+        return blocService.findBlocsByFoyerCapacity(capacity);
+    }
+    @GetMapping("/renamebloc/{id}/{nombloc}")
+    public void renameBloc(@PathVariable Long id, @PathVariable String nombloc){
+         blocService.renameBloc(id,nombloc);
+    }
+
+    @GetMapping("/deletebloc/{nombloc}")
+    public void deletebloc(@PathVariable String nombloc){
+            blocService.deleteBloc(nombloc);
+    }
+
 }
