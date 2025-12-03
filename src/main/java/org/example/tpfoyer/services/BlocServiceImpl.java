@@ -121,4 +121,5 @@ public class BlocServiceImpl implements IBlocService {
     public void deleteBloc(String nombloc){
         blocRepository.deleteBloc(nombloc);
     }
+
 }
