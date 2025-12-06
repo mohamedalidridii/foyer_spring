@@ -23,6 +23,7 @@ public class Foyer {
     long capaciteFoyer;
 
     @OneToOne(mappedBy = "foyer")
+            @JsonIgnore
     Universite universite;
 
     @OneToMany(mappedBy = "f")

@@ -7,7 +7,7 @@ import java.util.List;
 public interface IBlocService {
     Bloc addOrUpdateBloc(Bloc bloc);
     void deleteBloc(long id);
-    List<Bloc> getBlocs();
+    List <Bloc> getBlocs  () throws InterruptedException;
     Bloc getBloc(long id);
     Bloc ajouterBlocAvecFoyer(Bloc bloc);
     Bloc affecterBlocAFoyer(Long idBloc, Long idFoyer);

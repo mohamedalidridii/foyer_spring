@@ -8,6 +8,7 @@ import org.example.tpfoyer.repositories.BlocRepository;
 
 import org.example.tpfoyer.repositories.FoyerRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -31,8 +32,16 @@ public class BlocServiceImpl implements IBlocService {
     }
 
     @Override
-    public List<Bloc> getBlocs() {
-        return blocRepository.findAll();
+    @Scheduled(fixedRate = 10000) //delay de l'execution
+    public List<Bloc> getBlocs() throws InterruptedException {
+
+        List <Bloc> blocs= blocRepository.findAll();
+        Thread.sleep(5000);
+
+        for(Bloc bloc:blocs){
+            log.info("bloc : {}", bloc);
+        }
+        return blocs;
     }
 
     @Override

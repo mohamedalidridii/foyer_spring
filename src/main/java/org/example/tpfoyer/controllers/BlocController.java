@@ -29,8 +29,8 @@ public class BlocController {
         blocService.deleteBloc(idBloc);
     }
     @GetMapping("/findAllBloc")
-    List<Bloc> findAllBloc(){
-        return blocService.getBlocs();
+    List<Bloc> findAllBloc() throws InterruptedException {
+        return blocService.getBlocs()  ;
 
     }
     @GetMapping("/findById/{idBloc}")

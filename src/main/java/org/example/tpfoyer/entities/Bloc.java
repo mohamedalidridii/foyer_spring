@@ -12,7 +12,6 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Bloc {
     @Id
@@ -22,9 +21,12 @@ public class Bloc {
     long capaciteBloc;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+
     Foyer f;
 
     @OneToMany(mappedBy = "blocs")
-    @JsonIgnore
+        @JsonIgnore
+        @ToString.Exclude
     Set<Chambre> chambre;
 }
